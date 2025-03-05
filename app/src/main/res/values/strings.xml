@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Html5Pro</string>
+    <string name="privacy_dialog_title">用户协议和隐私政策</string>
+    <string name="privacy_dialog_content">为了更好的向您提供服务，请您务必审慎阅读《用户协议》和《隐私政策》各条款。\n\n请您充分理解包括但不限于：我们需要收集您的设备标识、操作日志等信息用于分析、优化应用性能。\n\n请通过下方按钮决定服务类型。</string>
+    <string name="privacy_agree_content_text">《用户协议》</string>
+    <string name="privacy_disagree_content_text">《隐私政策》</string>
+    <string name="privacy_agree_button_text">同意并接受</string>
+    <string name="privacy_disagree_button_text">仅使用基本服务</string>
+    <string name="webview_error_ssl_version">系统环境内置安全协议版本过低，为确保您的信息安全已停止继续为您服务，请考虑升级相关内容。</string>
+    <string name="webview_error_javascript_syntax">系统环境无法提供应用基础支撑，请考虑升级 WebView 等相关应用。</string>
+    <string name="webview_error_load_timeout">很抱歉，由于网络故障，应用加载超时。</string>
+    <string name="webview_error_page_title">这里已是荒芜</string>
+    <string name="webview_error_page_message">未知原因故障</string>
+    <string name="webview_error_page_retry_button_text">使用浏览器打开</string>
+    <string name="webview_error_page_exit_button">退出</string>
+    <string name="webview_package_broken">系统环境无法提供应用基础支撑，请尝试修复 WebView 等相关应用。</string>
+    <string name="open_with_default_browser">正在唤起您的默认浏览器</string>
+    <string name="snack_bar_dismiss_button_text">好的</string>
+</resources>
