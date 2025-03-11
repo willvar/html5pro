@@ -3,7 +3,6 @@ package cn.willvar.html5pro
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.Typeface
@@ -33,8 +32,6 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -66,7 +63,6 @@ class MainActivity : AppCompatActivity() {
   private lateinit var webView: WebView
   private lateinit var loadingScreen: View
   private lateinit var loadingProgress: CircularProgressIndicator
-  private lateinit var splashScreen: SplashScreen
   private lateinit var defaultUrl: String
   private lateinit var browseUrl: String
   private lateinit var updateManager: UpdateManager
@@ -87,9 +83,7 @@ class MainActivity : AppCompatActivity() {
     }
   }
 
-  @SuppressLint("SourceLockedOrientationActivity")
   override fun onCreate(savedInstanceState: Bundle?) {
-    splashScreen = installSplashScreen()
     super.onCreate(savedInstanceState)
     app = applicationContext as MainApplication
     // 初始化 datastore
@@ -111,7 +105,6 @@ class MainActivity : AppCompatActivity() {
       window.isNavigationBarContrastEnforced = false
     }
     try {
-      setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
       setContentView(R.layout.main_activity)
     } catch (e: Exception) {
       app.startErrorPage(getText(R.string.webview_package_broken).toString(), "0.0.0.0")
@@ -252,8 +245,9 @@ class MainActivity : AppCompatActivity() {
         Log.e("WebView", "onPageFinished: $url")
         Log.e("WebView", "onPageFinished: ${webView.copyBackForwardList().currentIndex}")
         if (webView.copyBackForwardList().currentIndex != -1) {
-          // 页面加载完成后隐藏 loading 屏
+          // 页面加载完成后隐藏 loadingScreen、显示 webView
           loadingScreen.visibility = View.GONE
+          webView.visibility = View.VISIBLE
           webViewTimeOutJob?.cancel()
           if (!hasPageLoadedOnce) {
             // 首次加载完成触发

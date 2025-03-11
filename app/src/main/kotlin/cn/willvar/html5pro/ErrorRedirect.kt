@@ -54,7 +54,7 @@ class ErrorRedirect : AppCompatActivity() {
     // 设置按钮点击监听器
     retryButton.setOnClickListener {
       performHaptic(rootView)
-      app.openUrlInBrowser("https://m.quanzhua.com")
+      app.openUrlInBrowser("https://www.google.com")
     }
     quitButton.setOnClickListener {
       performHaptic(rootView)
