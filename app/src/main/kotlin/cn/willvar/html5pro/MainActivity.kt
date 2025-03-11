@@ -155,12 +155,10 @@ class MainActivity : AppCompatActivity() {
       setupWebView()
       when (SettingStorage.get("privacy", "dialog")) {
         "agree" -> {
-          loadingProgress.visibility = View.VISIBLE
           loadUrl(defaultUrl)
         }
 
         "disagree" -> {
-          loadingProgress.visibility = View.VISIBLE
           loadUrl(browseUrl)
         }
 
@@ -284,11 +282,9 @@ class MainActivity : AppCompatActivity() {
         webViewTimeOutJob?.cancel()
         // 检查是否为主框架请求，避免捕获 iframe 加载错误
         if (request.isForMainFrame) {
-          loadingScreen.visibility = View.VISIBLE
           showErrorPage(error.description.toString())
         } else if (error.description.toString().contains("net::ERR_SSL_VERSION_OR_CIPHER_MISMATCH")) {
           // 客户端不支持服务端 SSL 版本
-          loadingScreen.visibility = View.VISIBLE
           showErrorPage(getText(R.string.webview_error_ssl_version).toString())
         }
       }
@@ -322,6 +318,7 @@ class MainActivity : AppCompatActivity() {
 
   // 由于 pageStart 视 webView 版本不同时机可能不准影响超时计时因此需要再次封装
   private fun loadUrl(url: String) {
+    loadingProgress.visibility = View.VISIBLE
     webViewTimeOutJob?.cancel()
     webViewTimeOutJob = watchWebViewTimeOut()
     webView.loadUrl(url)
@@ -376,11 +373,9 @@ class MainActivity : AppCompatActivity() {
       setPadding(72, 0, 72, 0)
     }).setPositiveButton(getText(R.string.privacy_agree_button_text)) { _, _ ->
       SettingStorage.set("privacy", "dialog", "agree")
-      loadingProgress.visibility = View.VISIBLE
       loadUrl(defaultUrl)
     }.setNegativeButton(getText(R.string.privacy_disagree_button_text)) { _, _ ->
       SettingStorage.set("privacy", "dialog", "disagree")
-      loadingProgress.visibility = View.VISIBLE
       loadUrl(browseUrl)
     }.setCancelable(false).show()
   }
